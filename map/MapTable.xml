@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <MapTable>
 	<Area name="kmr" nickname="Goomba Region">
 		<Map name="kmr_00" nickname="Forest Clearing" flags="1"/>
@@ -18,10 +18,12 @@
 		<Map name="kmr_23" nickname="Chapter End" hasShape="false" hasHit="false"/>
 		<Map name="kmr_24" nickname="Save and Continue" hasShape="false" hasHit="false"/>
 		<Map name="kmr_30" nickname="Mario's House (Ending)"/>
+		<Map name="kmr_32" nickname="Goomboss"/>
 		<Stage name="kmr_bt03"/>
 		<Stage name="kmr_bt04"/>
 		<Stage name="kmr_bt05"/>
 		<Stage name="kmr_bt06"/>
+		<Stage name="kmr_bt00" nickname="Goomboss"/>
 	</Area>
 	<Area name="mac" nickname="Toad Town">
 		<Map name="machi" nickname="Debug Warp Zone"/>
@@ -130,7 +132,7 @@
 		<Map name="trd_01" nickname="Left Tower" flags="103"/>
 		<Map name="trd_02" nickname="Left Stairway" flags="103"/>
 		<Map name="trd_03" nickname="Central Hall" flags="103"/>
-		<Map name="trd_04" nickname="Right Starway" flags="103"/>
+		<Map name="trd_04" nickname="Right Stairway" flags="103"/>
 		<Map name="trd_05" nickname="Right Tower" flags="103"/>
 		<Map name="trd_06" nickname="Jail" flags="103"/>
 		<Map name="trd_07" nickname="Dungeon Trap" flags="103"/>
@@ -244,10 +246,10 @@
 		<Map name="mim_02" nickname="Stump Eyes" flags="102"/>
 		<Map name="mim_03" nickname="Flowers (Oaklie)" flags="102"/>
 		<Map name="mim_04" nickname="Tree Face (Bub-ulb)" flags="102"/>
-		<Map name="mim_05" nickname="Mushrooms (HP Plus)" flags="102"/>
-		<Map name="mim_06" nickname="Bee Hive (Path Splits)" flags="102"/>
-		<Map name="mim_07" nickname="Flowers Vanish" flags="102"/>
-		<Map name="mim_08" nickname="Laughing Rock" flags="102"/>
+		<Map name="mim_05" nickname="Mushrooms (Path Splits)" flags="102"/>
+		<Map name="mim_06" nickname="Flowers Vanish" flags="102"/>
+		<Map name="mim_07" nickname="Laughing Rock" flags="102"/>
+		<Map name="mim_08" nickname="Bee Hive (HP Plus)" flags="102"/>
 		<Map name="mim_09" nickname="Flowers Appear (FP Plus)" flags="102"/>
 		<Map name="mim_10" nickname="Exit to Toad Town"/>
 		<Map name="mim_11" nickname="Outside Boo's Mansion" flags="102"/>
@@ -480,7 +482,7 @@
 		<Map name="kpa_08" nickname="Castle Key Timing Puzzle" flags="102"/>
 		<Map name="kpa_09" nickname="Ultra Shroom Timing Puzzle" flags="102"/>
 		<Map name="kpa_10" nickname="Outside Lower Jail (No Lava)" flags="103"/>
-		<Map name="kpa_11" nickname="Outisde Lower Jail (Lava)" flags="103"/>
+		<Map name="kpa_11" nickname="Outside Lower Jail (Lava)" flags="103"/>
 		<Map name="kpa_12" nickname="Lava Channel 1" flags="103"/>
 		<Map name="kpa_13" nickname="Lava Channel 2" flags="103"/>
 		<Map name="kpa_14" nickname="Lava Channel 3" flags="103"/>

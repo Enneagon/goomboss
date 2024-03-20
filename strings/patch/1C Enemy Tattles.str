@@ -1,0 +1,206 @@
+#message:1C:096
+{
+	[Style Right]
+	This is Atlas, the Goomba titan[BR]
+	of the underworld.[BR]
+	[Wait][Next]
+	Legends say he was imprisoned[BR]
+	for a terrible crime, but no one[BR]
+	remembers what it was.[BR]
+	[Wait][Next]
+	Each surviving Chain increases[BR]
+	Atlas' DEF by 1. He can also[BR]
+	launch them with a powerful kick[BR]
+	attack.[BR]
+	[Wait][Next]But supposedly, they're the only[BR]
+	thing holding him back from using[BR]
+	his Ultimate Attack...[Wait][End]
+}
+
+#message:1C:097
+{
+	[Style Right]
+	This is one of the Chains of[BR]
+	Atlas. Their job is to keep Atlas[BR]
+	imprisoned in the underworld.[BR]
+	[Wait][Next]
+	They must have once been angelic[BR]
+	Goombas, but centuries down here[BR]
+	have warped them into demonic[BR]
+	weapons.[BR]
+	[Wait][Next]
+	Atlas can kick them to boost[BR]
+	their power, but even without him,[BR]
+	they can deliver brutal headbonks.[BR]
+	Watch out![Wait][End]
+}
+
+#message:1C:098
+{
+	[Style Right]
+	This is Phlegmat, part of the[BR]
+	body of Eukrasia. It represents[BR]
+	one of the Four Humors.[BR]
+	[Wait][Next]
+	Phlegm keeps your body working,[BR]
+	but sharing it can get people[BR]
+	sick. I think Phlegmat likes to[BR]
+	share too much...[Wait][End]
+}
+
+#message:1C:099
+{
+	[Style Right]
+	This is Sanguin, part of the body[BR]
+	of Eukrasia. It represents one[BR]
+	of the Four Humors.[BR]
+	[Wait][Next]
+	Blood is creepy, but only because[BR]
+	it's supposed to stay inside your[BR]
+	body. If you can see it,[BR]
+	something's usually wrong.[Wait][End]
+}
+
+#message:1C:09A
+{
+	[Style Right]
+	This is Coleric, part of the body[BR]
+	of Eukrasia. It represents one[BR]
+	of the Four Humors.[BR]
+	[Wait][Next]
+	Yellow bile can burn through[BR]
+	steel. It's kind of amazing that[BR]
+	we keep it inside us.[Wait][End]
+}
+
+#message:1C:09B
+{
+	[Style Right]
+	This is Melanc, part of the body[BR]
+	of Eukrasia. It represents one[BR]
+	of the Four Humors.[BR]
+	[Wait][Next]
+	Black bile is... I'm not totally[BR]
+	sure what it is. I think it's[BR]
+	something to do with the spleen?[BR]
+	Bodies are gross.[Wait][End]
+}
+
+#message:1C:09C
+{
+	[Style Right]
+	This is Eukrasia, the mother of[BR]
+	all earthly Goombas.[BR]
+	[Wait][Next]
+	She's invincible while any of the[BR]
+	Four Humors surround her. If one[BR]
+	dies, she'll buff the others.[BR]
+	[Wait][Next]
+	On top of that, each Humor can[BR]
+	use a unique supermove when it's[BR]
+	directly below her. Yikes![BR]
+	[Wait][Next]
+	If we can take out all four[BR]
+	parts of her body, she'll die[BR]
+	instantly. But that might be[BR]
+	easier said than done...[Wait][End]
+}
+
+#message:1C:09D
+{
+	[Style Right]
+	This is Justice, holy Goomba[BR]
+	guardian of the heavenly realms.[BR]
+	[Wait][Next]
+	It's a pretty straightforward[BR]
+	bruiser. But if either of us lays[BR]
+	a finger on Innocence, it'll fly[BR]
+	into a rage.[BR]
+	[Wait][Next]
+	I'm not sure how much help I can[BR]
+	be here, Mario. We may have to[BR]
+	rethink our strategy...[Wait][End]
+}
+
+#message:1C:09E
+{
+	[Style Right]
+	This is Innocence, ward of the[BR]
+	heavenly realms. She's everything[BR]
+	that earthly Goombas should[BR]
+	aspire to be like.[BR]
+	[Wait][Next]
+	So long as Justice is on the[BR]
+	field, she'll spend every turn[BR]
+	healing him. She's no slouch on her[BR]
+	own, either.[BR]
+	[Wait][Next]
+	If we can just find a way to[BR]
+	incapacitate her without hurting[BR]
+	her, we might stand a chance.[Wait][End]
+}
+
+#message:1C:09F
+{
+	[Style Right]
+	This is the Overgoom, high deity[BR]
+	of all Goombas.[BR]
+	[Wait][Next]
+	The vessel it summons will get[BR]
+	closer each turn. If we let it get[BR]
+	too close, it'll KO you.[BR]
+	[Wait][Next]
+	The vessel can't be harmed, but[BR]
+	it can be pushed back a little by[BR]
+	attacking it.[BR]
+	[Wait][Next]
+	Legends say the Overgoom has[BR]
+	some sort of unstoppable ultimate[BR]
+	ability if pushed to the brink...[BR]
+	[Wait][Next]
+	Should we really be doing this,[BR]
+	Mario?[Wait][End]
+}
+
+#message:1C:0A0
+{
+	[Style Right]
+	AAAAAAAAAAAAAAAAAAAAAAAAAA[BR]
+	AAAAAAAAAAAAAAAAAAAAAAAAAA[BR]
+	AAAAAAAAAAAAAAAAAAAAAAAAAA[BR]
+	AAAAAAAAAAAAAAAAAAAAAAH![BR]
+	[Wait][Next]
+	This, um, this is Goomblivion,[BR]
+	destroyer of all! Holy shrooms,[BR]
+	Mario, we're going to die![BR]
+	[Wait][Next]
+	I take it back! I don't want the[BR]
+	stupid picnic anymore! We gotta[BR]
+	get outta here![Wait][End]
+}
+
+#message:1C:0A1
+{
+	[Style Right]
+	This is just a scrawny Goomba.[BR]
+	I can't see this battle being any[BR]
+	kind of trouble at all. Get him,[BR]
+	Mario![Wait][End]
+}
+
+#message:1C:0A2
+{
+	[Style Right]
+	Ah, this is the perfect spot for[BR]
+	a picnic. It's gonna be great![BR]
+	[Wait][Next]
+	Hey Mario, you remembered to[BR]
+	keep my jelly seperate from my[BR]
+	Ultra Shroom, right?[BR]
+	[Wait][Next]
+	You know I don't like soggy[BR]
+	mushrooms! Yuck![BR]
+	[Wait][Next]
+	C'mon, let's gank this sad-sack[BR]
+	Goomba so we can chow down![Wait][End]
+}

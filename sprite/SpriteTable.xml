@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <SpriteTable>
 	<NpcSprites>
 		<Sprite id="1" src="01" name="World Goombario"/>
@@ -7,7 +7,7 @@
 		<Sprite id="4" src="04" name="World Parakarry"/>
 		<Sprite id="5" src="05" name="World Bow"/>
 		<Sprite id="6" src="06" name="World Watt"/>
-		<Sprite id="7" src="07" name="World Sushi"/>
+		<Sprite id="7" src="07" name="World Sushie"/>
 		<Sprite id="8" src="08" name="World Lakilester"/>
 		<Sprite id="9" src="09" name="Battle Goombario"/>
 		<Sprite id="A" src="0A" name="Battle Kooper"/>
@@ -15,7 +15,7 @@
 		<Sprite id="C" src="0C" name="Battle Parakarry"/>
 		<Sprite id="D" src="0D" name="Battle Bow"/>
 		<Sprite id="E" src="0E" name="Battle Watt"/>
-		<Sprite id="F" src="0F" name="Battle Sushi"/>
+		<Sprite id="F" src="0F" name="Battle Sushie"/>
 		<Sprite id="10" src="10" name="Battle Lakilester"/>
 		<Sprite id="11" src="11" name="Kooper Without Shell"/>
 		<Sprite id="12" src="12" name="World Eldstar"/>
@@ -157,11 +157,11 @@
 		<Sprite id="9A" src="9A" name="Penguin"/>
 		<Sprite id="9B" src="9B" name="Shiver Toad"/>
 		<Sprite id="9C" src="9C" name="Alt Bandit"/>
-		<Sprite id="9D" src="9D" name="Goompapa"/>
+		<Sprite id="9D" src="9D" name="Goompa"/>
 		<Sprite id="9E" src="9E" name="Goombaria"/>
-		<Sprite id="9F" src="9F" name="Goomama"/>
-		<Sprite id="A0" src="A0" name="Goompa"/>
-		<Sprite id="A1" src="A1" name="Goomma"/>
+		<Sprite id="9F" src="9F" name="Gooma"/>
+		<Sprite id="A0" src="A0" name="Goompapa"/>
+		<Sprite id="A1" src="A1" name="Goomama"/>
 		<Sprite id="A2" src="A2" name="The Master"/>
 		<Sprite id="A3" src="A3" name="Chan"/>
 		<Sprite id="A4" src="A4" name="Lee"/>
@@ -220,7 +220,7 @@
 		<Sprite id="D9" src="D9" name="Parade Luigi"/>
 		<Sprite id="DA" src="DA" name="Parade Partners"/>
 		<Sprite id="DB" src="DB" name="Parade Yoshis"/>
-		<Sprite id="DC" src="DC" name="Parada Kolorados"/>
+		<Sprite id="DC" src="DC" name="Parade Kolorados"/>
 		<Sprite id="DD" src="DD" name="Parade Chicks"/>
 		<Sprite id="DE" src="DE" name="Parade Ice Show"/>
 		<Sprite id="DF" src="DF" name="Parade Toads"/>

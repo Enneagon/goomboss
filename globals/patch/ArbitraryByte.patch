@@ -1,0 +1,139 @@
+%Get arbitrary byte
+%    Returns value of (second arg) into (first arg)
+#export:Function $Function_GetArbitraryByte %( out, address ) 
+{
+PUSH RA, A0, A1, S0, S1, S2
+COPY    S2, A0
+LW        S1, C (A0)
+LW        A1, 0 (S1) %get argument 1
+COPY    S0, A1
+ADDIU    S1, S1, 4
+COPY    A0, S2
+JAL        ~Func:get_variable
+LW        A1, 0 (S1) %get argument 2
+%S0 = first arg pointer
+%V0 = second arg
+%LIO    T0, 800DC070
+%ADD    T0, T0, V0
+COPY    T0, V0
+LBU        T1, 0 (T0)
+%store
+COPY    A2, T1
+COPY    A0, S2
+ADDIU    S1, S1, FFFC
+JAL        ~Func:set_variable
+LW        A1, 0 (S1) %get argument 1
+POP RA, A0, A1, S0, S1, S2
+JR    RA
+ADDIU    V0, R0, 2
+}
+
+% Call $ReadAddress ( Address ByteSize *out offset FollowPointer )
+#export:Function $ReadAddress
+{
+    PUSH    RA, S0, S1, S2, S3, S4
+    LW      S0, C (A0)
+    % Get Argument 5
+    JAL     ~Func:get_variable
+    LW      A1, 10 (S0)
+    COPY    S4, V0
+    % Get Argument 4
+    JAL     ~Func:get_variable
+    LW      A1, C (S0)
+    COPY    S3, V0
+    % Get Argument 3
+    LW      S2, 8 (S0) % load Var from arg2
+    % Get Argument 2
+    JAL     ~Func:get_variable
+    LW      A1, 4 (S0)
+    COPY    S1, V0
+    % Get Argument 1
+    JAL     ~Func:get_variable
+    LW      A1, 0 (S0)
+    /%
+    Arg1=V0=Address
+    Arg2=S1=ByteSize
+    Arg3=S2=*out
+    Arg4=S3=Offset
+    Arg5=S4=Pointer Flag
+    %/
+    % A pointer need to be followed?
+    BNEL    S4, R0, .ReadPointer
+    LW      V0, 0 (V0)
+    .ReadPointer
+    % Read Offset
+    ADDU    V0, V0, S3
+    % Read 1, 2 or 4 Bytes
+    % Byte
+    BEQL    S1, R0, .WriteVar
+    LBU     A2, 0 (V0)
+    % Half
+    ORI     T2, R0, 1
+    BEQL    S1, T2, .WriteVar
+    LHU     A2, 0 (V0)
+    % Word
+    ORI     T2, R0, 2
+    BEQ     R0, R0, .WriteVar
+    LW      A2, 0 (V0)
+    .WriteVar
+    % Get Argument 3 and write output
+    JAL 	~Func:set_variable
+    COPY    A1, S2  % copy *out in to A1
+    POP     RA, S0, S1, S2, S3, S4
+    JR      RA
+    ORI     V0, R0, 2
+}
+
+#export:Function $WriteAddress
+{
+    PUSH    RA, S0, S1, S2, S3, S4
+    LW      S0, C (A0)
+    % Get Argument 5
+    JAL     ~Func:get_variable
+    LW      A1, 10 (S0)
+    COPY    S4, V0
+    % Get Argument 4
+    JAL     ~Func:get_variable
+    LW      A1, C (S0)
+    COPY    S3, V0
+    % Get Argument 3
+    JAL     ~Func:get_variable
+    LW      A1, 8 (S0) % load Var from arg2
+    COPY    S2, V0
+    % Get Argument 2
+    JAL     ~Func:get_variable
+    LW      A1, 4 (S0)
+    COPY    S1, V0
+    % Get Argument 1
+    JAL     ~Func:get_variable
+    LW      A1, 0 (S0)
+    /%
+    Arg1=V0=Address
+    Arg2=S1=ByteSize
+    Arg3=S2=NewValue
+    Arg4=S3=Offset
+    Arg5=S4=Pointer Flag
+    %/
+    % A pointer need to be followed?
+    BNEL    S4, R0, .ReadPointer
+    LW      V0, 0 (V0)
+    .ReadPointer
+    % Read Offset
+    ADDU    V0, V0, S3
+    % Write 1, 2 or 4 Bytes
+    % Byte
+    BEQL    S1, R0, .End
+    SB      S2, 0 (V0)
+    % Half
+    ORI     T2, R0, 1
+    BEQL    S1, T2, .End
+    SH      S2, 0 (V0)
+    % Word
+    ORI     T2, R0, 2
+    BEQ     R0, R0, .End
+    SW      S2, 0 (V0)
+    .End
+    POP     RA, S0, S1, S2, S3, S4
+    JR      RA
+    ORI     V0, R0, 2
+}

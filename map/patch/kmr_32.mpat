@@ -1,0 +1,94 @@
+@ $Script_Main {
+    Set   *GB_WorldLocation  .Location:GoombaRoad
+    Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+    Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+    Call  SetCamEnabled      ( .Cam:Default .True )
+    Call  SetCamLeadPlayer   ( .Cam:Default .False )
+    Exec  $Script_SetupMusic
+    Exec  $Script_MakeNPCs
+    Exec  $Script_EnterMap
+    Exec  $Script_Main_Callback_AfterEnterMap
+    Return
+    End
+}
+
+@ $Header
+{
+	[MainScript] $Script_Main
+	[Background] 80200000
+	[EntryList] $EntryList
+	[EntryCount] 1
+	[MapTattle]   001C00A2
+}
+
+#new:Script $Script_MakeNPCs
+{
+    Call  MakeNpcs  ( .False $NpcGroupList_Always )
+    Return
+    End
+}
+
+#new:NpcGroupList $NpcGroupList_Always
+{
+	00000001 $NpcGroup_Always 30000000
+    00000000 00000000 00000000
+}
+
+#new:NpcGroup $NpcGroup_Always
+{
+	00000000 $NpcSettings_Standard ~Vec3f:Goomboss
+	00000001 $Script_Init_Goomboss 00000000 00000000 00000000
+	~NoDrops
+	~Movement:Goomboss
+	~AnimationTable:Goomboss
+	00000000 00000000 00000000 001C00A1 % Tattle ID
+}
+
+#new:NpcSettings $NpcSettings_Standard
+{
+	00000000 001E0018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+
+#new:Script $Script_Init_Goomboss
+{
+    Call SetNpcYaw ( .Npc:Self 270` )
+    Call  BindNpcInteract   ( .Npc:Self $Script_Interact_Goomboss )
+    Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_Goomboss )
+    Return
+    End
+}
+
+#new:Script $Script_Interact_Goomboss
+{
+    Call DisablePlayerInput ( .True )
+    Call  SpeakToPlayer ( .Npc:Self 00260001 00260001 00000000 00010001 ) % String
+    Call StartBossBattle ( .Song:GoombaKingBattle )
+    Return
+    End
+}
+
+#new:Script $Script_Defeat_Goomboss
+{
+    Call  SpeakToPlayer ( .Npc:Self 00260001 00260001 00000000 00010017 ) % String
+    Call GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
+    Call  PlayEffect        ( ~FX:Explosion1 *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+    Call SetNpcPos ( .Npc:Self 0` -100` 0` )
+    Wait 60`
+    Call  ShowMessageAtScreenPos    ( 00010018  160`  40` ) % End.
+    Wait 300`
+    Call  ShowMessageAtScreenPos    ( 00010019  160`  40` ) % End.
+    Return
+    End
+}
+
+@ $Script_Main_Callback_AfterEnterMap {
+    Call DisablePlayerInput ( .True )
+    Wait 20`
+    Call DisablePartnerAI ( 00000000 )
+    Call SpeakToPlayer ( .Npc:Partner 00010008 00010001 00000000 00010000 )
+    Call EnablePartnerAI ()
+    Call DisablePlayerInput ( .False )
+    Return
+    End
+}

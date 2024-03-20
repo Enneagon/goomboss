@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- You can define up to 255 actor types (0-FE). Read the docs for more information. -->
 <ActorTypes>
 	<ActorType desc="RedGoomba" id="00" name="00290081" tattle="00000000" sfxWalk="20DD,20DD" sfxFly="20DD,20DD" sfxJump="3E2" sfxHurt="10F" sfxIncrement="30,30"/>
@@ -213,4 +213,15 @@
 	<ActorType desc="SlotMachineStart" id="D1" name="00290076" tattle="001C0093" sfxIncrement="30,30"/>
 	<ActorType desc="SlotMachineStart" id="D2" name="00290076" tattle="001C0093" sfxIncrement="30,30"/>
 	<ActorType desc="SlotMachineStart" id="D3" name="00290076" tattle="001C0093" sfxIncrement="30,30"/>
+	<ActorType desc="Atlas" id="D4" name="00290083" tattle="001C0096" tattleCamOffset="0,6,10" sfxWalk="20EC,20EC" sfxHurt="10F" sfxIncrement="22,30"/>
+	<ActorType desc="ChainOfAtlas" id="D5" name="00290084" tattle="001C0097" tattleCamOffset="0,4,0" sfxWalk="3AC,3AC" sfxJump="10F" sfxHurt="10F" sfxIncrement="30,30"/>
+	<ActorType desc="Phlegmat" id="D6" name="00290085" tattle="001C0098" tattleCamOffset="0,5,0" sfxWalk="20DD,20DD" sfxJump="3E2" sfxHurt="10F" sfxIncrement="30,30"/>
+	<ActorType desc="Sanguin" id="D7" name="00290086" tattle="001C0099" tattleCamOffset="0,5,0" sfxWalk="20DD,20DD" sfxJump="3E2" sfxHurt="10F" sfxIncrement="30,30"/>
+	<ActorType desc="Coleric" id="D8" name="00290087" tattle="001C009A" tattleCamOffset="0,5,0" sfxWalk="20DD,20DD" sfxJump="3E2" sfxHurt="10F" sfxIncrement="30,30"/>
+	<ActorType desc="Melanc" id="D9" name="00290088" tattle="001C009B" tattleCamOffset="0,5,0" sfxWalk="20DD,20DD" sfxJump="3E2" sfxHurt="10F" sfxIncrement="30,30"/>
+	<ActorType desc="Eukrasia" id="DA" name="00290089" tattle="001C009C" tattleCamOffset="0,5,0" sfxWalk="20DD,20DD" sfxFly="20DD,20DD" sfxJump="3E2" sfxHurt="10F" sfxIncrement="30,30"/>
+	<ActorType desc="Justice" id="DB" name="0029008A" tattle="001C009D" tattleCamOffset="0,4,0" sfxWalk="3AC,3AC" sfxJump="10F" sfxHurt="10F" sfxIncrement="30,30"/>
+	<ActorType desc="Innocence" id="DC" name="0029008B" tattle="001C009E" tattleCamOffset="0,5,0" sfxWalk="20DD,20DD" sfxJump="3E2" sfxHurt="10F" sfxIncrement="30,30"/>
+	<ActorType desc="Overgoom" id="DD" name="0029008C" tattle="001C009F" tattleCamOffset="0,4,0" sfxWalk="20DF,20DF" sfxFly="20DF,20DF" sfxJump="3E2" sfxHurt="10F" sfxIncrement="30,30"/>
+	<ActorType desc="Goomblivion" id="DE" name="0029008D" tattle="001C00A0" tattleCamOffset="0,6,10" sfxWalk="20EC,20EC" sfxJump="10F" sfxHurt="10F" sfxIncrement="22,30"/>
 </ActorTypes>

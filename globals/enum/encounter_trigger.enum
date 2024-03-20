@@ -6,4 +6,5 @@ false				% reversed
 2 = Jump
 3 = Spin	% spin/dizzy attack
 4 = Hammer
+5 = Conversation
 6 = Partner % kooper/bombette

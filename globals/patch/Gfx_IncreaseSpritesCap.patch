@@ -1,0 +1,13 @@
+% Remove the sprite cap in the game
+
+% Patch func_8013AF70
+@Function D1708 % 8013B008
+{
+    ORI     V0, R0, 1
+}
+
+% Patch func_8013AF70
+@Function D1710 % 8013B010
+{
+    ORI     V0, R0, 1
+}

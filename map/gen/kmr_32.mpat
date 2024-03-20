@@ -1,0 +1,62 @@
+% Auto-generated script for kmr_32
+
+#new:Header $Header
+{
+	[MainScript] $Script_Main
+	[Background] 80200000
+	[EntryList] $EntryList
+	[EntryCount] 1
+}
+
+#new:EntryList $EntryList
+{
+	~Vec4f:Entry0
+}
+
+#new:Script_Main $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Exec  $Script_SetupMusic
+	Exec  $Script_EnterMap
+	Exec  $Script_Main_Callback_AfterEnterMap
+	Return
+	End
+}
+
+#new:Script $Script_SetupMusic
+{
+	Call  SetMusicTrack ( 00000000 .Song:PleasantPath 00000000 00000008 )
+	Call  ClearAmbientSounds ( 250` )
+	Return
+	End
+}
+
+#new:Script $Script_EnterMap
+{
+	Call  GetEntryID    ( *Var[0] )
+	Switch  *Var[0]
+		Case  ==  ~Entry:Entry0
+			Set   *Var[0] $Script_CreateExitTriggers
+			Exec  EnterWalk
+		Default
+			Exec  $Script_CreateExitTriggers
+	EndSwitch
+	Return
+	End
+}
+
+#new:Script $Script_CreateExitTriggers
+{
+	Return
+	End
+}
+
+#new:Script $Script_Main_Callback_AfterEnterMap
+{
+	Return
+	End
+}

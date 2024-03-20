@@ -1,11 +1,64 @@
 
 @ $Function_80238B60 {
-	[2C]  LTW	V0, V0 ($Global_ActorTattleTable)
-	[38]  LIA	V1, $Global_ActorTattleTable
+    [2C]  LTW   V0, V0 ($Global_ActorTattleTable)
+    [38]  LIA   V1, $Global_ActorTattleTable
 }
 
 @ $Function_80238BCC {
-	[1CC]  LTB	V1, V0 ($Global_ActorOffsetsTable)
-	[1EC]  LTB	V1, V0 ($Global_ActorOffsetsTable[1])
-	[210]  LTB	A0, V0 ($Global_ActorOffsetsTable[2])
+    [1CC]  LTB  V1, V0 ($Global_ActorOffsetsTable)
+    [1EC]  LTB  V1, V0 ($Global_ActorOffsetsTable[1])
+    [210]  LTB  A0, V0 ($Global_ActorOffsetsTable[2])
+}
+
+@ $Script_8023C5B8 {
+    Call  GetActorPos   ( .Actor:Partner *Var0 *Var1 *Var2 )
+    Add   *Var0  0000001E
+    Call  SetActorSpeed ( .Actor:Partner *Fixed[6.0] )
+    Call  SetAnimation  ( .Actor:Partner FFFFFFFF 00090003 )
+    Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
+    Call  RunToGoal     ( .Actor:Partner  0` .False )
+    Call  SetAnimation  ( .Actor:Partner FFFFFFFF 00090001 )
+    Call  InitTargetIterator ( )
+    Call  SetGoalToTarget   ( .Actor:Partner )
+    Call  SetBattleFlagBits ( 00000004 .True )
+    Call  $Function_80238E04 ( )
+    Wait  12`
+    Call  SetCamEnabled ( .Cam:Tattle .True )
+    Call  SetCamFlag80  ( .Cam:Tattle .False )
+    Call  SetCamPerspective ( .Cam:Tattle 00000006  25`  16`  1024` )
+    Call  SetCamViewport    ( .Cam:Tattle  137`  95`  138`  99` )
+    Call  GetOwnerTarget    ( *VarA *VarB )
+    Call  GetActorPos   ( *VarA *Var0 *Var1 *Var2 )
+    Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
+    Call  $Function_80238BCC ( )
+    Wait  1`
+    Call  802CAE50      ( 00000002 *Var0 *Var1 *Var2 )
+    Call  802CABE8      ( 00000002 00000000 *Var3 00000064 00000004 )
+    Wait  2`
+    Call  PlaySoundAtActor  ( .Actor:Partner 00000282 )
+    Call  SetCamFlag80  ( .Cam:Tattle .True )
+    Wait  10`
+    Call  $Function_80238B60 ( )
+    Call  ActorSpeak    ( *Var0 .Actor:Self 00000001 0009000F 00090001 ) % variable string ID
+    Call  $Function_80238E48 ( )
+    Wait  12`
+    Call  SetCamEnabled ( .Cam:Tattle .False )
+    Wait  32`
+    Call  UseBattleCamPreset    ( 00000002 )
+    Call  SetBattleFlagBits ( 00000004 .False )
+    Call  80280818 ( )
+    Call  SetGoalToHome ( .Actor:Partner )
+    Call  SetActorSpeed ( .Actor:Partner *Fixed[4.0] )
+    Call  SetActorJumpGravity   ( .Actor:Partner *Fixed[1.8] )
+    Call  SetAnimation  ( .Actor:Partner FFFFFFFF 00090003 )
+    Call  RunToGoal     ( .Actor:Partner  0` )
+    Call  SetAnimation  ( .Actor:Partner FFFFFFFF 00090001 )
+    Call $FreeTurn (  )
+    Return
+    End
+}
+@ $Script_NextTurn_80239A3C {
+    Call  GetBattlePhase    ( *Var0 )
+    Return
+    End
 }

@@ -4,3 +4,6 @@
 *.iis
 *.mtl
 *.txa
+
+*.hs
+*.is
