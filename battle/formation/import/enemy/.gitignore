@@ -1,2 +1,14 @@
 # Original game data
 /[0-9A-F][0-9A-F]_*.bpat
+
+!/99_Atlas.bpat
+!/99_Chains.bpat
+!/99_Coleric.bpat
+!/99_Eukrasia.bpat
+!/99_Goomblivion.bpat
+!/99_Innocence.bpat
+!/99_Justice.bpat
+!/99_Melanc.bpat
+!/99_Overgoom.bpat
+!/99_Phlegmat.bpat
+!/99_Sanguin.bpat

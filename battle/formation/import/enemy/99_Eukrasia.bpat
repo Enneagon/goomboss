@@ -1,0 +1,509 @@
+% Automatically dumped from section 00
+
+#new:Actor $99_Eukrasia {
+% stats
+[Index]         DAb 
+[Level]         5`b 
+[MaxHP]         1`b 
+[Coins]         1`b 
+[Flags]       00200204 
+[StatusTable] $StatusTable_Eukrasia
+% ai
+[PartsCount]    1`s 
+[PartsTable]  $PartsTable_Eukrasia
+[Script]      $Script_Init_Eukrasia
+% move effectiveness
+[Escape]       90`b 
+[Item]        100`b 
+[AirLift]     100`b 
+[Hurricane]    90`b % Bow's "Spook" as well
+[UpAndAway]    0`b 
+[PowerBounce] 100`b 
+[SpinSmash]     0`b % weight (0-4)
+% ui positions
+[Size]         24`b  24`b % width height
+[HealthBar]     0`b   0`b % dx dy
+[StatusTurn]  -10`b  20`b % dx dy
+[StatusIcon]   10`b  20`b % dx dy
+}
+
+#new:DefenseTable $DefenseTable_Eukrasia {
+.Element:Normal 00000063
+.Element:End
+}
+
+#new:StatusTable $StatusTable_Eukrasia {
+.Status:Normal      0`
+.Status:Default     0`
+.Status:Sleep       0`
+.Status:Poison      0`
+.Status:Frozen      0`
+.Status:Dizzy       0`
+.Status:Fear        0`
+.Status:Static      0`
+.Status:Paralyze    0`
+.Status:Shrink      0`
+.Status:Stop        0`
+.Status:DefaultTurnMod    0`
+.Status:SleepTurnMod      0`
+.Status:PoisonTurnMod     0`
+.Status:FrozenTurnMod     0`
+.Status:DizzyTurnMod      0`
+.Status:FearTurnMod       0`
+.Status:StaticTurnMod     0`
+.Status:ParalyzeTurnMod   0`
+.Status:ShrinkTurnMod     0`
+.Status:StopTurnMod       0`
+.Status:End
+}
+
+#new:PartsTable $PartsTable_Eukrasia {
+     20020001 01000000 001E00FF $IdleAnimations_Eukrasia $DefenseTable_Eukrasia 00000000 00000000 00F60000 00000000 
+}
+
+#new:IdleAnimations $IdleAnimations_Eukrasia {
+.Status:Normal    009F0001
+.Status:Stone     009F0000
+.Status:Sleep     009F0008
+.Status:Poison    009F0001
+.Status:Stop      009F0000
+.Status:Static    009F0001
+.Status:Paralyze  009F0000
+.Status:Dizzy     009F0007
+.Status:Fear      009F0007
+.Status:End
+}
+
+#new:Script $Script_Init_Eukrasia
+{
+    0:  Call  SetActorPos   ( .Actor:Self  83` 67` 0` )
+   1C:  Call  ForceHomePos  ( .Actor:Self  83` 67` 0` )
+   38:  Call  HPBarToHome   ( .Actor:Self )
+   48:  Call  BindTakeTurn  ( .Actor:Self $Script_TakeTurn_Eukrasia )
+   5C:  Call  BindIdle      ( .Actor:Self $Script_Idle_Eukrasia )
+   70:  Call  BindHandleEvent   ( .Actor:Self $Script_HandleEvent_Eukrasia )
+   Call SetActorVar ( .Actor:Self 00000000 00000000 )
+   Call SetActorVar ( .Actor:Self 00000001 00000000 )
+   Call SetActorVar ( .Actor:Self 00000002 00000000 )
+  11C:  Return
+  124:  End
+}
+
+#new:Script $Script_Idle_Eukrasia {
+    Loop
+  2AC:  	Wait  1`
+  2B8:  EndLoop
+  2CC:  Return
+  2D4:  End
+}
+
+#new:Script $Script_HandleEvent_Eukrasia {
+    0:  Call  UseIdleAnimation  ( .Actor:Self .False )
+   14:  Call  EnableIdleScript  ( .Actor:Self 00000000 )
+   28:  Call  SetActorScale     ( .Actor:Self *Fixed[1.0] *Fixed[1.0] *Fixed[1.0] )
+   44:  Call  GetLastEvent      ( .Actor:Self *Var0 )
+   58:  Switch  *Var0 
+   64:  	CaseOR  ==  .Event:HitCombo % 9
+   70:  	CaseOR  ==  .Event:Hit % A
+   7C:  		SetConst  *Var0  00000001 
+   8C:  		SetConst  *Var1  009F0005 
+   9C:  		ExecWait  DoNormalHit 
+   A8:  	EndCaseGroup
+   B0:  	Case  ==  .Event:BurnHit % E
+   BC:  		SetConst  *Var0  00000001 
+   CC:  		SetConst  *Var1  009F0009 
+   DC:  		SetConst  *Var2  009F000A 
+   EC:  		ExecWait  DoBurnHit 
+   F8:  	Case  ==  .Event:BurnDeath % 24
+  104:  		SetConst  *Var0  00000001 
+  114:  		SetConst  *Var1  009F0009 
+  124:  		SetConst  *Var2  009F000A 
+  134:  		ExecWait  DoBurnHit 
+  140:  		SetConst  *Var0  00000001 
+  150:  		SetConst  *Var1  009F000A 
+  160:  		ExecWait  DoDeath 
+  16C:  		Return
+  174:  	Case  ==  .Event:SpinSmashHit % B
+  180:  		SetConst  *Var0  00000001 
+  190:  		SetConst  *Var1  009F0005 
+  1A0:  		ExecWait  DoSpinSmashHit 
+  1AC:  	Case  ==  .Event:SpinSmashDeath % 21
+  1B8:  		SetConst  *Var0  00000001 
+  1C8:  		SetConst  *Var1  009F0005 
+  1D8:  		ExecWait  DoSpinSmashHit 
+  1E4:  		SetConst  *Var0  00000001 
+  1F4:  		SetConst  *Var1  009F0006 
+  204:  		ExecWait  DoDeath 
+  210:  		Return
+  218:  	Case  ==  .Event:ShockHit % 2F
+  224:  		SetConst  *Var0  00000001 
+  234:  		SetConst  *Var1  009F000E 
+  244:  		ExecWait  DoShockHit 
+  250:  		SetConst  *Var0  00000001 
+  260:  		SetConst  *Var1  009F0005 
+  270:  		ExecWait  DoJumpBack 
+  27C:  		Call  JumpToGoal    ( .Actor:Self  5` .False .True .False )
+  29C:  		Call  SetAnimationRate      ( .Actor:Self 00000001 *Fixed[2.0] )
+  2B4:  		Call  SetAnimation  ( .Actor:Self 00000001 009F0007 )
+  2CC:  		Call  SetGoalToHome ( .Actor:Self )
+  2DC:  		Call  SetActorSpeed ( .Actor:Self *Fixed[8.0] )
+  2F0:  		Call  RunToGoal     ( .Actor:Self  0` .False )
+  308:  		Call  SetAnimationRate      ( .Actor:Self 00000001 *Fixed[1.0] )
+  320:  		Wait  5`
+  32C:  		Call  SetAnimation  ( .Actor:Self 00000001 009F0001 )
+  344:  		Call  SetActorJumpGravity   ( .Actor:Self *Fixed[1.6] )
+  358:  		Call  JumpToGoal    ( .Actor:Self  5` .False .True .False )
+  378:  	Case  ==  .Event:ShockDeath % 26
+  384:  		SetConst  *Var0  00000001 
+  394:  		SetConst  *Var1  009F000E 
+  3A4:  		ExecWait  DoShockHit 
+  3B0:  		SetConst  *Var0  00000001 
+  3C0:  		SetConst  *Var1  009F0006 
+  3D0:  		ExecWait  DoDeath 
+  3DC:  		Return
+  3E4:  	Case  ==  .Event:StarBeam % 13
+  3F0:  	CaseOR  ==  00000017 % 17
+  3FC:  	CaseOR  ==  .Event:Immune % 19
+  408:  	CaseOR  ==  .Event:AirLiftFailed % 1F
+  414:  		SetConst  *Var0  00000001 
+  424:  		SetConst  *Var1  009F0001 
+  434:  		ExecWait  DoImmune 
+  440:  	EndCaseGroup
+  448:  	Case  ==  .Event:Death % 20
+  454:  		SetConst  *Var0  00000001 
+  464:  		SetConst  *Var1  009F0004 
+  474:  		ExecWait  DoNormalHit 
+  480:  		Wait  10`
+  48C:  		SetConst  *Var0  00000001 
+  49C:  		SetConst  *Var1  009F0004 
+  4AC:  		ExecWait  DoDeath 
+  4B8:  		Return
+  4C0:  	Case  ==  .Event:EndFirstStrike % 35
+  4CC:  		Call  SetAnimationRate  ( .Actor:Self 00000001 *Fixed[2.0] )
+  4E4:  		Call  SetAnimation  ( .Actor:Self 00000001 009F0003 )
+  4FC:  		Call  SetGoalToHome ( .Actor:Self )
+  50C:  		Call  SetActorSpeed ( .Actor:Self *Fixed[4.0] )
+  520:  		Call  RunToGoal     ( .Actor:Self  0` .False )
+  538:  		Call  SetAnimationRate  ( .Actor:Self 00000001 *Fixed[1.0] )
+  550:  		Call  HPBarToHome   ( .Actor:Self )
+  560:  	Case  ==  .Event:RecoverStatus % 31
+  56C:  		SetConst  *Var0  00000001 
+  57C:  		SetConst  *Var1  009F0001 
+  58C:  		ExecWait  DoRecover 
+  598:  	Case  ==  .Event:ScareAway % 39
+  5A4:  		SetConst  *Var0  00000001 
+  5B4:  		SetConst  *Var1  009F0003 
+  5C4:  		SetConst  *Var2  009F0004 
+  5D4:  		ExecWait  DoScareAway 
+  5E0:  		Return
+  5E8:  	Case  ==  .Event:BeginAirLift % 3A
+  5F4:  		SetConst  *Var0  00000001 
+  604:  		SetConst  *Var1  009F0003 
+  614:  		ExecWait  DoAirLift 
+  620:  	Case  ==  .Event:BlowAway % 16
+  62C:  		SetConst  *Var0  00000001 
+  63C:  		SetConst  *Var1  009F0004 
+  64C:  		ExecWait  DoBlowAway 
+  658:  		Return
+  660:  	Default
+  668:  EndSwitch
+  670:  Call  SetAnimation      ( .Actor:Self 00000001 009F0001 )
+  688:  Call  EnableIdleScript  ( .Actor:Self 00000001 )
+  69C:  Call  UseIdleAnimation  ( .Actor:Self .True )
+  6B0:  Return
+  6B8:  End
+}
+
+#new:Script $Script_TakeTurn_Eukrasia {
+     Call GetActorVar ( .Actor:Self 00000001 *Var0 )
+     Call GetActorVar ( .Actor:Self 00000002 *Var1 )
+     Switch *Var0
+     Case == 1`
+          If *Var1 == 0`
+               Thread
+                    Call  ShowMessageAtScreenPos    ( 0001000C  160`  40` ) % Wholeness of Body
+               EndThread
+               Call GetActorPos ( .Actor:Self *Var0 *Var1 *Var2 ) 
+               Add *Var0 20`
+               Add *Var1 20`
+               Call PlaySoundAtActor ( .Actor:Self .Sound:BigPowerUp ) 
+               Call PlayEffect ( ~FX:StatChange:AttackPlus1 *Var0 *Var1 *Var2 *Fixed[1.0] 30` )
+               Call ActorExists ( .Actor:Enemy3 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy3 .True )
+                    Call AddActorVar ( .Actor:Enemy3 00000001 1` )
+               EndIf
+               Call ActorExists ( .Actor:Enemy4 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy4 .True )
+                    Call AddActorVar ( .Actor:Enemy4 00000001 1` )
+               EndIf
+               Call ActorExists ( .Actor:Enemy5 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy5 .True )
+                    Call AddActorVar ( .Actor:Enemy5 00000001 1` )
+               EndIf
+               Call ActorExists ( .Actor:Enemy6 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy6 .True )
+                    Call AddActorVar ( .Actor:Enemy6 00000001 1` )
+               EndIf
+               Call SetActorVar ( .Actor:Self 00000002 1` )
+               Wait 30`
+          EndIf
+     Case == 2`
+          If *Var1 <= 1`
+               Thread
+                    Call  ShowMessageAtScreenPos    ( 0001000C  160`  40` ) % Wholeness of Body
+               EndThread
+               Call GetActorPos ( .Actor:Self *Var0 *Var1 *Var2 ) 
+               Add *Var0 20`
+               Add *Var1 20`
+               Call PlaySoundAtActor ( .Actor:Self .Sound:BigPowerUp ) 
+               Call PlayEffect ( ~FX:StatChange:DefensePlus1 *Var0 *Var1 *Var2 *Fixed[1.0] 30` )
+               Call ActorExists ( .Actor:Enemy3 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy3 .True )
+                    Call SetDefenseTable ( .Actor:Enemy3 00000001 $DefenseTable_Wholeness )
+               EndIf
+               Call ActorExists ( .Actor:Enemy4 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy4 .True )
+                    Call SetDefenseTable ( .Actor:Enemy4 00000001 $DefenseTable_Wholeness )
+               EndIf
+               Call ActorExists ( .Actor:Enemy5 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy5 .True )
+                    Call SetDefenseTable ( .Actor:Enemy5 00000001 $DefenseTable_Wholeness )
+               EndIf
+               Call ActorExists ( .Actor:Enemy6 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy6 .True )
+                    Call SetDefenseTable ( .Actor:Enemy6 00000001 $DefenseTable_Wholeness )
+               EndIf
+               Call SetActorVar ( .Actor:Self 00000002 2` )
+               Wait 30`
+          EndIf
+     Case == 3`
+          If *Var1 <= 2`
+               Thread
+                    Call  ShowMessageAtScreenPos    ( 0001000C  160`  40` ) % Wholeness of Body
+               EndThread
+               Call GetActorPos ( .Actor:Self *Var0 *Var1 *Var2 ) 
+               Add *Var0 20`
+               Add *Var1 20`
+               Call PlaySoundAtActor ( .Actor:Self .Sound:BigPowerUp ) 
+               Call PlayEffect ( ~FX:StatChange:AttackPlus2 *Var0 *Var1 *Var2 *Fixed[1.0] 30` )
+               Call ActorExists ( .Actor:Enemy3 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy3 .True )
+                    Call AddActorVar ( .Actor:Enemy3 00000001 2` )
+               EndIf
+               Call ActorExists ( .Actor:Enemy4 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy4 .True )
+                    Call AddActorVar ( .Actor:Enemy4 00000001 2` )
+               EndIf
+               Call ActorExists ( .Actor:Enemy5 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy5 .True )
+                    Call AddActorVar ( .Actor:Enemy5 00000001 2` )
+               EndIf
+               Call ActorExists ( .Actor:Enemy6 *Var2 )
+               If *Var2 == .True
+                    Call EnableActorGlow ( .Actor:Enemy6 .True )
+                    Call AddActorVar ( .Actor:Enemy6 00000001 2` )
+               EndIf
+               Call SetActorVar ( .Actor:Self 00000002 3` )
+               Wait 30`
+          EndIf
+     EndSwitch
+     Call GetActorVar ( .Actor:Self 00000000 *Var0 )
+     Switch *Var0
+     Case == 00000000
+     Thread
+          Call ActorExists ( .Actor:Enemy3 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy3 83` 0` 0` )
+               Call SetGoalPos ( .Actor:Enemy3 83` 0` 0` )
+               Call SetPartPos ( .Actor:Enemy3 00000002 83` 0` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy3 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy3 15` .False .False .True )
+               Call SetActorVar ( .Actor:Enemy3 00000000 00000000 )
+               Call  HPBarToHome   ( .Actor:Enemy3 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy4 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy4 133` 67` 0` )
+               Call SetGoalPos ( .Actor:Enemy4 133` 67` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy4 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy4 15` .False .False .True )
+               Call  HPBarToHome   ( .Actor:Enemy4 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy5 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy5 83` 117` 0` )
+               Call SetGoalPos ( .Actor:Enemy5 83` 117` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy5 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy5 15` .False .False .True )
+               Call  HPBarToHome   ( .Actor:Enemy5 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy6 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy6 33` 67` 0` )
+               Call SetGoalPos ( .Actor:Enemy6 33` 67` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy6 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy6 15` .False .False .True )
+               Call SetActorVar ( .Actor:Enemy6 00000000 00000001 )
+               Call  HPBarToHome   ( .Actor:Enemy6 )
+          EndIf
+     EndThread
+     Wait 10`
+          Call SetActorVar ( .Actor:Self 00000000 00000001 )
+     Case == 00000001
+     Thread
+          Call ActorExists ( .Actor:Enemy3 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy3 33` 67` 0` )
+               Call SetGoalPos ( .Actor:Enemy3 33` 67` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy3 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy3 15` .False .False .True )
+               Call SetActorVar ( .Actor:Enemy3 00000000 00000001 )
+               Call  HPBarToHome   ( .Actor:Enemy3 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy4 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy4 83` 0` 0` )
+               Call SetGoalPos ( .Actor:Enemy4 83` 0` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy4 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy4 15` .False .False .True )
+               Call SetActorVar ( .Actor:Enemy4 00000000 00000000 )
+               Call  HPBarToHome   ( .Actor:Enemy4 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy5 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy5 133` 67` 0` )
+               Call SetGoalPos ( .Actor:Enemy5 133` 67` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy5 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy5 15` .False .False .True )
+               Call  HPBarToHome   ( .Actor:Enemy5 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy6 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy6 83` 117` 0` )
+               Call SetGoalPos ( .Actor:Enemy6 83` 117` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy6 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy6 15` .False .False .True )
+               Call  HPBarToHome   ( .Actor:Enemy6 )
+          EndIf
+     EndThread
+     Wait 10`
+          Call SetActorVar ( .Actor:Self 00000000 00000002 )
+     Case == 00000002
+     Thread
+          Call ActorExists ( .Actor:Enemy3 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy3 83` 117` 0` )
+               Call SetGoalPos ( .Actor:Enemy3 83` 117` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy3 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy3 15` .False .False .True )
+               Call  HPBarToHome   ( .Actor:Enemy3 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy4 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy4 33` 67` 0` )
+               Call SetGoalPos ( .Actor:Enemy4 33` 67` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy4 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy4 15` .False .False .True )
+               Call SetActorVar ( .Actor:Enemy4 00000000 00000001 )
+               Call  HPBarToHome   ( .Actor:Enemy4 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy5 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy5 83` 0` 0` )
+               Call SetGoalPos ( .Actor:Enemy5 83` 0` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy5 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy5 15` .False .False .True )
+               Call SetActorVar ( .Actor:Enemy5 00000000 00000000 )
+               Call  HPBarToHome   ( .Actor:Enemy5 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy6 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy6 133` 67` 0` )
+               Call SetGoalPos ( .Actor:Enemy6 133` 67` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy6 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy6 15` .False .False .True )
+               Call  HPBarToHome   ( .Actor:Enemy6 )
+          EndIf
+     EndThread
+     Wait 10`
+          Call SetActorVar ( .Actor:Self 00000000 00000003 )
+     Case == 00000003
+     Thread
+          Call ActorExists ( .Actor:Enemy3 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy3 133` 67` 0` )
+               Call SetGoalPos ( .Actor:Enemy3 133` 67` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy3 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy3 15` .False .False .True )
+               Call  HPBarToHome   ( .Actor:Enemy3 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy4 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy4 83` 117` 0` )
+               Call SetGoalPos ( .Actor:Enemy4 83` 117` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy4 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy4 15` .False .False .True )
+               Call  HPBarToHome   ( .Actor:Enemy4 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy5 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy5 33` 67` 0` )
+               Call SetGoalPos ( .Actor:Enemy5 33` 67` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy5 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy5 15` .False .False .True )
+               Call SetActorVar ( .Actor:Enemy5 00000000 00000001 )
+               Call  HPBarToHome   ( .Actor:Enemy5 )
+          EndIf
+     EndThread
+     Thread
+          Call ActorExists ( .Actor:Enemy6 *Var0 )
+          If *Var0 == .True
+               Call SetHomePos ( .Actor:Enemy6 83` 0` 0` )
+               Call SetGoalPos ( .Actor:Enemy6 83` 0` 0` )
+               Call SetActorJumpGravity ( .Actor:Enemy6 *Fixed[0.8] )
+               Call JumpToGoal ( .Actor:Enemy6 15` .False .False .True )
+               Call SetActorVar ( .Actor:Enemy6 00000000 00000000 )
+               Call  HPBarToHome   ( .Actor:Enemy6 )
+          EndIf
+     EndThread
+          Wait 10`
+          Call SetActorVar ( .Actor:Self 00000000 00000000 )
+     EndSwitch
+     Wait 10`
+  CB8:  Return
+  CC0:  End
+}
+
