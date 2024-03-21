@@ -64,13 +64,13 @@
 #new:IdleAnimations $IdleAnimations_Eukrasia {
 .Status:Normal    009F0001
 .Status:Stone     009F0000
-.Status:Sleep     009F0008
+.Status:Sleep     009F0001
 .Status:Poison    009F0001
 .Status:Stop      009F0000
 .Status:Static    009F0001
 .Status:Paralyze  009F0000
-.Status:Dizzy     009F0007
-.Status:Fear      009F0007
+.Status:Dizzy     009F0001
+.Status:Fear      009F0001
 .Status:End
 }
 
@@ -106,45 +106,45 @@
    64:  	CaseOR  ==  .Event:HitCombo % 9
    70:  	CaseOR  ==  .Event:Hit % A
    7C:  		SetConst  *Var0  00000001 
-   8C:  		SetConst  *Var1  009F0005 
+   8C:  		SetConst  *Var1  009F0004 
    9C:  		ExecWait  DoNormalHit 
    A8:  	EndCaseGroup
    B0:  	Case  ==  .Event:BurnHit % E
    BC:  		SetConst  *Var0  00000001 
-   CC:  		SetConst  *Var1  009F0009 
-   DC:  		SetConst  *Var2  009F000A 
+   CC:  		SetConst  *Var1  009F0004 
+   DC:  		SetConst  *Var2  009F0004 
    EC:  		ExecWait  DoBurnHit 
    F8:  	Case  ==  .Event:BurnDeath % 24
   104:  		SetConst  *Var0  00000001 
-  114:  		SetConst  *Var1  009F0009 
-  124:  		SetConst  *Var2  009F000A 
+  114:  		SetConst  *Var1  009F0004 
+  124:  		SetConst  *Var2  009F0004 
   134:  		ExecWait  DoBurnHit 
   140:  		SetConst  *Var0  00000001 
-  150:  		SetConst  *Var1  009F000A 
+  150:  		SetConst  *Var1  009F0004 
   160:  		ExecWait  DoDeath 
   16C:  		Return
   174:  	Case  ==  .Event:SpinSmashHit % B
   180:  		SetConst  *Var0  00000001 
-  190:  		SetConst  *Var1  009F0005 
+  190:  		SetConst  *Var1  009F0004 
   1A0:  		ExecWait  DoSpinSmashHit 
   1AC:  	Case  ==  .Event:SpinSmashDeath % 21
   1B8:  		SetConst  *Var0  00000001 
-  1C8:  		SetConst  *Var1  009F0005 
+  1C8:  		SetConst  *Var1  009F0004 
   1D8:  		ExecWait  DoSpinSmashHit 
   1E4:  		SetConst  *Var0  00000001 
-  1F4:  		SetConst  *Var1  009F0006 
+  1F4:  		SetConst  *Var1  009F0004 
   204:  		ExecWait  DoDeath 
   210:  		Return
   218:  	Case  ==  .Event:ShockHit % 2F
   224:  		SetConst  *Var0  00000001 
-  234:  		SetConst  *Var1  009F000E 
+  234:  		SetConst  *Var1  009F0004 
   244:  		ExecWait  DoShockHit 
   250:  		SetConst  *Var0  00000001 
-  260:  		SetConst  *Var1  009F0005 
+  260:  		SetConst  *Var1  009F0004 
   270:  		ExecWait  DoJumpBack 
   27C:  		Call  JumpToGoal    ( .Actor:Self  5` .False .True .False )
   29C:  		Call  SetAnimationRate      ( .Actor:Self 00000001 *Fixed[2.0] )
-  2B4:  		Call  SetAnimation  ( .Actor:Self 00000001 009F0007 )
+  2B4:  		Call  SetAnimation  ( .Actor:Self 00000001 009F0004 )
   2CC:  		Call  SetGoalToHome ( .Actor:Self )
   2DC:  		Call  SetActorSpeed ( .Actor:Self *Fixed[8.0] )
   2F0:  		Call  RunToGoal     ( .Actor:Self  0` .False )
@@ -155,10 +155,10 @@
   358:  		Call  JumpToGoal    ( .Actor:Self  5` .False .True .False )
   378:  	Case  ==  .Event:ShockDeath % 26
   384:  		SetConst  *Var0  00000001 
-  394:  		SetConst  *Var1  009F000E 
+  394:  		SetConst  *Var1  009F0004 
   3A4:  		ExecWait  DoShockHit 
   3B0:  		SetConst  *Var0  00000001 
-  3C0:  		SetConst  *Var1  009F0006 
+  3C0:  		SetConst  *Var1  009F0004 
   3D0:  		ExecWait  DoDeath 
   3DC:  		Return
   3E4:  	Case  ==  .Event:StarBeam % 13
